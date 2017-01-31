@@ -108,7 +108,7 @@ I implemented this step in lines 565 through 603 in my code in `image_process.py
 ---
 
 ###Pipeline (video)
-After combining all the pieces of the pipeline I was able to accurately draw the lane back onto the original undistorted image, and successfully track the lane lines on every frame without much deviation from the actual lane.
+After combining all the pieces of the pipeline I was able to accurately draw the lane back onto the original undistorted image, and successfully track the lane lines on every frame without much deviation from the actual lane. The process for handling video used the same pipeline as for images. Each frame in the video is passed to `pipeline()` in the `image_process.py` module, and the image is processed according to the process detailed above, and then converted back into a video clip.
 
 Here's a [link to my video result](./video/final.mp4)
 
@@ -116,5 +116,7 @@ Here's a [link to my video result](./video/final.mp4)
 
 ###Discussion
 
-One of the key points to making this pipeline work were the experimentation with various types of thresholding across a large range of different color channels. Without the ability to accurately identify pixels that belong to the lane lines it is very hard to perform any of the subsequent processing. Much of the process relies on having a good binary threshold max that can separate the lane lines from the rest of the background image. While I was able to create a working example, I think a lot more study would need to be done on how to detect lane lines in a much wider range of lighting conditions, and with a variety of road surfaces to account for color variation. In addition, 
+One of the key points to making this pipeline work were the experimentation with various types of thresholding across a large range of different color channels. Without the ability to accurately identify pixels that belong to the lane lines it is very hard to perform any of the subsequent processing. Much of the process relies on having a good binary threshold that can separate the lane lines from the rest of the background image. While I was able to create a working example, I think a lot more study would need to be done on how to detect lane lines in a much wider range of lighting conditions, and with a variety of road surfaces to account for color variation. Since the video displayed here was taken on a clear day in ideal weather conditions, it would be necessary to test the pipeline out in a much larger variety of situations. For further research I would like to shoot additional video of different weather conditions, extreme road glare, driving in fog, snow, daytime vs. nightime driving, light road surfaces vs. dark road surfaces, poorly marked lane lines, etc. In addition, I would also like to work to create a pipeline that isn't based only on hard coded but that adapts to a changing environment. It would be exciting to explore deriving the source points to do the perspective transform dynamically based on the horizon, or detecting lanes to the left and right for lane changing, or varying the threshold used based on detected lighting conditions. 
+
+Overall, I am happy with this first pass of the lane finding pipeline and am excited to keep exploring.
 
