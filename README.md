@@ -71,8 +71,8 @@ This resulted in the following source and destination points:
 
 I checked that the source points made sense in the context of the original image, and also verified that for a test image with straight lines that the destination points in the perspective transformed image were also straight and parallel. 
 
-| Original        | Undistorted     |
-| :-------------: | :-------------: |
+| Source Points   | Perspective Transform   |
+| :-------------: | :---------------------: |
 |![Source Points][image11] | ![Warped Image][image12]|
 
 
