@@ -32,7 +32,7 @@ Using a variety of chessboard images taken from different angles I was able to u
 | :-------------: | :-------------: |
 |![Original][image1] | ![Undistorted][image2]|
 
-###Pipeline (single images)
+##Pipeline (single images)
 
 Below is an example of how the pre-calculated camera matrix and distortion coefficients are applied to an image taken from a front facing camera in the car. By using `cv2.undistort()` the road images can be undistorted just like the chessboard calibration images.
 
@@ -40,7 +40,7 @@ Below is an example of how the pre-calculated camera matrix and distortion coeff
 | :-------------: | :-------------: |
 |![Original][image3] | ![Undistorted][image4]|
 
-#### Color Transformation and Thresholding
+### Color Transformation and Thresholding
 
 A significant portion of this project was spent on trying to find the best color spaces and thresholding parameters to choose to help isolate just the lane line pixels. I experimented with converting the original camera images to a variety of color spaces including rgb, hls, hsv, luv, lab, ycbcr, and yuv. I also experimented with using adaptive thresholding, and sobel gradient thresholding, as well as a combination of all of the above to find the most effective binary image to use as a base for isolating lane pixels to determine the curvature of the road. Several examples of different color space thresholds can be seen in the images below.
 
@@ -50,13 +50,13 @@ A significant portion of this project was spent on trying to find the best color
 ![LAB Threshold][image8]
 ![YCrCb Threshold][image9]
 
-It is important to find a threshold that will handle road surface color variation, as well as changing lighting conditions. Many thresholds are able to handle gradients well or find the yellow lines very well, or the white lines. However, it is combining multiple gradients together, that it is possible to get the best of all possibilities. 
+It is important to find a threshold that will handle road surface color variation, as well as changing lighting conditions. Many thresholds are able to handle gradients well or find the yellow lines very well, or the white lines. However, it is only by combining multiple gradients together, that it is possible to get the best of all possibilities. 
 
 My code for image processing is in the `image_process.py` module in the function called `processImage()` and the thresholding process begins at line 370. In the end the threshold that I found to work the best was a combination of using sobel x and y gradients mixed with a thresholded b channel form the Lab color space, and the Y channel from the YCbCr color space.
 
 ![Combined Threshold][image10]
 
-####Perspective Transform
+###Perspective Transform
 
 The code for my perspective transform is also in the `image_process.py` module on line 391 of the `processImage()` function. To perform the perspective transform I experimented with different source points that lie on a plain, and through trial and error came up with a fixed set of points that works well for warping the image. Using fixed points worked relatively well for this project, since the car in the example video isn't going up or down any really steep inclines. Because of this we can assume that there will always be a similar fixe plane projected into the image out in from of the car.
 
@@ -79,14 +79,14 @@ I calculated the transformation matrix M using opencv's `cv2.getPerspective()` a
 ![Perspective Threshold][image14]
 
 
-####Detect Lane Lines and Fit a Polynomial
+###Detect Lane Lines and Fit a Polynomial
 
 I implemented a sliding window to detect the lane pixels from the perspectived transformed threshold image. My code for finding the lane lines is in the `image_process.py` module in a function called `getLaneLineCoordinates()`, and it starts by taking a histogram of the threshold image to find the two largest peaks. It then proceeds to step up the image in discrete windows and pull out the coordinates of all the lane pixels. Once I accurately detect all of the lane pixels and separate them into the right and left lane line, I was able to use the detected coordinates to fit a polynomial to each lane. I did this in the function `fitCurve()` which takes x and y coordinates for the left and right lanes as input, and then returns the fit line and the curvature of the radius. 
 
 ![Curve Fit][image15]
 ![Lane Mask][image16]
 
-####Curvature of Radius
+###Curvature of Radius
 
 The curvature of the radius must first be calculated in pixel space(x, y) coordinates, and then converted back into meters based on the image dimensions to match what the car is seeing in the real world.
 
