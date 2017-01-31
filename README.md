@@ -37,7 +37,7 @@ Using a variety of chessboard images taken from different angles I was able to u
 Below is an example of how the pre-calculated camera matrix and distortion coefficients are applied to an image taken from a front facing camera in the car. By using `cv2.undistort()` the road images can be undistorted just like the chessboard calibration images.
 
 | Original        | Undistorted     |
-| :------------- :| :-------------: |
+| :-------------: | :-------------: |
 |![Original][image3] | ![Undistorted][image4]|
 
 #### Color Transformation and Thresholding
