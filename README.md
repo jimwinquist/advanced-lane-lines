@@ -71,8 +71,10 @@ This resulted in the following source and destination points:
 
 I checked that the source points made sense in the context of the original image, and also verified that for a test image with straight lines that the destination points in the perspective transformed image were also straight and parallel. 
 
-![Source Points][image11]
-![Warped Image][image12]
+| Original        | Undistorted     |
+| :-------------: | :-------------: |
+|![Source Points][image11] | ![Warped Image][image12]|
+
 
 I calculated the transformation matrix M using opencv's `cv2.getPerspective()` and then used `cv2.warpPerspective()` to transform the undistorted image into a birds-eye-view perspective transform. Both the warped image and warped threshold image can be seen below.
 ![Perspective Transform][image13]
