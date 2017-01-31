@@ -87,18 +87,17 @@ I calculated the transformation matrix M using opencv's `cv2.getPerspective()` a
 
 I implemented a sliding window to detect the lane pixels from the perspectived transformed threshold image. My code for finding the lane lines is in the `image_process.py` module in a function called `getLaneLineCoordinates()`, and it starts by taking a histogram of the threshold image to find the two largest peaks. It then proceeds to step up the image in discrete windows and pull out the coordinates of all the lane pixels. Once I accurately detect all of the lane pixels and separate them into the right and left lane line, I was able to use the detected coordinates to fit a polynomial to each lane. I did this in the function `fitCurve()` which takes x and y coordinates for the left and right lanes as input, and then returns the fit line and the curvature of the radius. 
 
-| Curve Fit  | Lane Mask   |
-| :--------: | :---------: |
+| Curve Fit            | Lane Mask            |
+| :------------------: | :------------------: |
 |![Curve Fit][image15] | ![Lane Mask][image16]|
 
 
 ###Curvature of Radius
 
-The curvature of the radius must first be calculated in pixel space(x, y) coordinates, and then converted back into meters based on the image dimensions to match what the car is seeing in the real world.
+The curvature of the radius must first be calculated in pixel space(x, y) coordinates, and then converted back into meters based on the image dimensions to match what the car is seeing in the real world. And the cars position with respect to center can be calculated by taking the difference between the lane center and the center of the image.
 
 I did this in lines 540 through 560 in my code in `image_process.py` in the `fitCurve()` function.
 
-And the cars position with respect to center can be calculated by taking the difference between the lane center and the center of the image.
 
 ###Draw Lane Lines
 
